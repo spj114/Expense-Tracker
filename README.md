@@ -75,3 +75,64 @@ Follow these steps to get the project running on your local machine.
 ```bash
 git clone https://github.com/spj114/Expense-Tracker.git
 cd Expense-Tracker
+```
+
+### 3. Set Up a Virtual Environment
+```bash
+# Create the environment
+python -m venv venv
+
+# Activate it (macOS/Linux)
+source venv/bin/activate
+
+# Activate it (Windows)
+.\venv\Scripts\activate
+```
+
+### 4. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Configure the Database
+-   Connect to your MySQL server and create a new database.
+    ```sql
+    CREATE DATABASE expense_manager;
+    ```
+-   Use the new database and create the `expenses` table with this schema:
+    ```sql
+    CREATE TABLE expenses (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        expense_date DATE NOT NULL,
+        amount DECIMAL(10, 2) NOT NULL,
+        category VARCHAR(255) NOT NULL,
+        notes TEXT
+    );
+    ```
+
+### 6. Set Up Environment Variables
+-   Create a copy of the example environment file:
+    ```bash
+    cp .env.example .env
+    ```
+-   Open the newly created `.env` file and add your database credentials.
+
+---
+
+## ▶️ How to Run
+
+You need **two separate terminals** to run the frontend and backend servers.
+
+#### Terminal 1: Start the Backend (FastAPI)
+```bash
+uvicorn server:app --reload
+```
+
+#### Terminal 2: Start the Frontend (Streamlit)
+```bash
+streamlit run app.py
+```
+
+The application will be available at:
+- **Frontend (Streamlit):** http://localhost:8501
+- **Backend API (FastAPI):** http://localhost:8000
